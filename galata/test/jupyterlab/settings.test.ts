@@ -233,6 +233,9 @@ test.describe('shorcuts list @A11y', () => {
         query: 'Keyboard Shortcuts'
       });
     });
+    await expect(
+      page.locator('.jp-Shortcuts-ShortcutListContainer')
+    ).toHaveCount(1);
 
     const shorcutListContainer = page.locator(
       '.jp-Shortcuts-ShortcutListContainer'
