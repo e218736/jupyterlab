@@ -226,3 +226,30 @@ test('Check codemirror settings can all be set at the same time.', async ({
     await expect(locator).toBeChecked();
   }
 });
+test.describe('shorcuts list @A11y', () => {
+  test('Should enter shortcuts container using tab key', async ({ page }) => {
+    await page.evaluate(async () => {
+      await window.jupyterapp.commands.execute('settingeditor:open', {
+        query: 'Keyboard Shortcuts'
+      });
+    });
+
+    const shorcutListContainer = page.locator(
+      '.jp-Shortcuts-ShortcutListContainer'
+    );
+    const shorcutListContainerId = shorcutListContainer.getAttribute('id');
+
+    // eslint-disable-next-line no-constant-condition
+    while (true) {
+      await page.keyboard.press('Tab');
+      let activeElement = await page.evaluate(
+        () => document.activeElement?.getAttribute('id')
+      );
+
+      if (activeElement === (await shorcutListContainerId)) {
+        break;
+      }
+    }
+    expect(page.locator('.jp-Shortcuts-ShortcutListContainer')).toBeFocused();
+  });
+});
