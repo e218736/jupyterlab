@@ -227,7 +227,7 @@ test('Check codemirror settings can all be set at the same time.', async ({
   }
 });
 test.describe('shorcuts list @A11y', () => {
-  test('Should enter shortcuts container using tab key', async ({ page }) => {
+  test('Should focus shortcuts container using tab key', async ({ page }) => {
     await page.evaluate(async () => {
       await window.jupyterapp.commands.execute('settingeditor:open', {
         query: 'Keyboard Shortcuts'
@@ -251,5 +251,33 @@ test.describe('shorcuts list @A11y', () => {
       }
     }
     expect(page.locator('.jp-Shortcuts-ShortcutList')).toBeFocused();
+  });
+
+  test('Should focus shortcuts container row using tab key', async ({
+    page
+  }) => {
+    await page.evaluate(async () => {
+      await window.jupyterapp.commands.execute('settingeditor:open', {
+        query: 'Keyboard Shortcuts'
+      });
+    });
+    await expect(
+      page.locator('.jp-Shortcuts-ShortcutListContainer')
+    ).toHaveCount(1);
+
+    const shorcutRow = page.locator('.jp-Shortcuts-Row');
+    const shorcutRowId = await shorcutRow.getAttribute('id');
+
+    // eslint-disable-next-line no-constant-condition
+    while (true) {
+      await page.keyboard.press('Tab');
+      let activeElementId = await page.evaluate(
+        () => document.activeElement?.getAttribute('id')
+      );
+      if (activeElementId === shorcutRowId) {
+        break;
+      }
+    }
+    expect(page.locator('.jp-Shortcuts-Row')).toBeFocused();
   });
 });
