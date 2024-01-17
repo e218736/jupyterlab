@@ -265,16 +265,16 @@ test.describe('shorcuts list @A11y', () => {
       page.locator('.jp-Shortcuts-ShortcutListContainer')
     ).toHaveCount(1);
 
-    const shorcutRow = page.locator('.jp-Shortcuts-Row');
-    const shorcutRowId = await shorcutRow.getAttribute('id');
+    const shorcutRow = page.getByTitle('application:activate-next-tab');
+    const shorcutRowTitle = await shorcutRow.getAttribute('title');
 
     // eslint-disable-next-line no-constant-condition
     while (true) {
       await page.keyboard.press('Tab');
-      let activeElementId = await page.evaluate(
-        () => document.activeElement?.getAttribute('id')
+      let activeElementTitle = await page.evaluate(
+        () => document.activeElement?.getAttribute('title')
       );
-      if (activeElementId === shorcutRowId) {
+      if (activeElementTitle === shorcutRowTitle) {
         break;
       }
     }
