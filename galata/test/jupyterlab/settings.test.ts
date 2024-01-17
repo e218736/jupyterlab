@@ -237,15 +237,15 @@ test.describe('shorcuts list @A11y', () => {
       page.locator('.jp-Shortcuts-ShortcutListContainer')
     ).toHaveCount(1);
 
-    let activeElementId = await page.evaluate(
-      () => document.activeElement?.getAttribute('id')
-    );
     const shorcutList = page.locator('.jp-Shortcuts-ShortcutList');
     const shorcutListId = await shorcutList.getAttribute('id');
 
     // eslint-disable-next-line no-constant-condition
     while (true) {
       await page.keyboard.press('Tab');
+      let activeElementId = await page.evaluate(
+        () => document.activeElement?.getAttribute('id')
+      );
       if (activeElementId === shorcutListId) {
         break;
       }
