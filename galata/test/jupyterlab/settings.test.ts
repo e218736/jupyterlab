@@ -265,6 +265,8 @@ test.describe('shorcuts list @A11y', () => {
       page.locator('.jp-Shortcuts-ShortcutListContainer')
     ).toHaveCount(1);
 
+    const shorcutRow = page.locator('.jp-Shortcuts-Row');
+
     // eslint-disable-next-line no-constant-condition
     while (true) {
       await page.keyboard.press('Tab');
@@ -275,6 +277,7 @@ test.describe('shorcuts list @A11y', () => {
         break;
       }
     }
-    expect(page.locator('.jp-Shortcuts-Row')).toBeFocused();
+
+    expect(shorcutRow).toBeFocused();
   });
 });
