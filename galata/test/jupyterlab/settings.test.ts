@@ -240,19 +240,16 @@ test.describe('shorcuts list @A11y', () => {
     let activeElementId = await page.evaluate(
       () => document.activeElement?.getAttribute('id')
     );
-    const shorcutListContainer = page.locator(
-      '.jp-Shortcuts-ShortcutListContainer'
-    );
-    const shorcutListContainerId =
-      await shorcutListContainer.getAttribute('id');
+    const shorcutList = page.locator('.jp-Shortcuts-ShortcutList');
+    const shorcutListId = await shorcutList.getAttribute('id');
 
     // eslint-disable-next-line no-constant-condition
     while (true) {
       await page.keyboard.press('Tab');
-      if (activeElementId === shorcutListContainerId) {
+      if (activeElementId === shorcutListId) {
         break;
       }
     }
-    expect(page.locator('.jp-Shortcuts-ShortcutListContainer')).toBeFocused();
+    expect(page.locator('.jp-Shortcuts-ShortcutList')).toBeFocused();
   });
 });
