@@ -278,6 +278,6 @@ test.describe('shorcuts list @A11y', () => {
       }
     }
 
-    expect(shorcutRow).toBeFocused();
+    await expect(shorcutRow).toBeFocused();
   });
 });
