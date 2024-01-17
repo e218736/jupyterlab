@@ -265,7 +265,7 @@ test.describe('shorcuts list @A11y', () => {
       page.locator('.jp-Shortcuts-ShortcutListContainer')
     ).toHaveCount(1);
 
-    const shorcutRow = page.locator('.jp-Shortcuts-Row');
+    const shorcutRow = page.locator('.jp-Shortcuts-Row')[0];
 
     // eslint-disable-next-line no-constant-condition
     while (true) {
