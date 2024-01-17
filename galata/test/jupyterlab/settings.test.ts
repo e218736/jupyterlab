@@ -265,16 +265,13 @@ test.describe('shorcuts list @A11y', () => {
       page.locator('.jp-Shortcuts-ShortcutListContainer')
     ).toHaveCount(1);
 
-    const shorcutRow = page.getByTitle('application:activate-next-tab');
-    const shorcutRowTitle = await shorcutRow.getAttribute('title');
-
     // eslint-disable-next-line no-constant-condition
     while (true) {
       await page.keyboard.press('Tab');
       let activeElementTitle = await page.evaluate(
         () => document.activeElement?.getAttribute('title')
       );
-      if (activeElementTitle === shorcutRowTitle) {
+      if (activeElementTitle === 'application:activate-next-tab') {
         break;
       }
     }
