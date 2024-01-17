@@ -245,10 +245,7 @@ test.describe('shorcuts list @A11y', () => {
     // eslint-disable-next-line no-constant-condition
     while (true) {
       await page.keyboard.press('Tab');
-      let activeElement = await page.evaluate(
-        () => document.activeElement?.getAttribute('id')
-      );
-
+      let activeElement = document.activeElement?.getAttribute('id');
       if (activeElement === (await shorcutListContainerId)) {
         break;
       }
