@@ -309,7 +309,7 @@ test.describe('shorcuts list @A11y', () => {
     const shortcutRows = page.locator('.jp-Shortcuts-Row');
 
     for (let i = 0; i < (await shortcutRows.count()); i++) {
-      shortcutRows.nth(i).focus();
+      await shortcutRows.nth(i).focus();
       await page.keyboard.press('ArrowRight');
       let activeElementClass = await page.evaluate(
         () => document.activeElement?.getAttribute('class')
