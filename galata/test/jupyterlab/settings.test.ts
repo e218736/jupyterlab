@@ -265,7 +265,8 @@ test.describe('shorcuts list @A11y', () => {
       page.locator('.jp-Shortcuts-ShortcutListContainer')
     ).toHaveCount(1);
 
-    const shorcutRow = page.locator('.jp-Shortcuts-Row')[0];
+    const shorcutRow = page.locator('.jp-Shortcuts-Row');
+    const shorcutRowTitle = await shorcutRow.getAttribute('title');
 
     // eslint-disable-next-line no-constant-condition
     while (true) {
@@ -273,7 +274,7 @@ test.describe('shorcuts list @A11y', () => {
       let activeElementTitle = await page.evaluate(
         () => document.activeElement?.getAttribute('title')
       );
-      if (activeElementTitle === 'application:activate-next-tab') {
+      if (activeElementTitle === shorcutRowTitle) {
         break;
       }
     }
