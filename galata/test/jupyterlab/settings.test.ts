@@ -303,4 +303,18 @@ test.describe('shorcuts list @A11y', () => {
 
     await expect(searchInput).toBeFocused();
   });
+  test('Should enter row and navigate buttons using arrow keys', async ({
+    page
+  }) => {
+    const shortcutRows = page.locator('.jp-Shortcuts-Row');
+
+    for (let i = 0; i < (await shortcutRows.count()); i++) {
+      shortcutRows[i].focus();
+      await page.keyboard.press('ArrowRight');
+      let activeElement = await page.evaluate(
+        () => document.activeElement?.getAttribute('class')
+      );
+      expect(activeElement).toContain('jp-Shortcuts-ShortcutKeys');
+    }
+  });
 });
