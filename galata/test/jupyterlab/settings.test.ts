@@ -309,12 +309,12 @@ test.describe('shorcuts list @A11y', () => {
     const shortcutRows = page.locator('.jp-Shortcuts-Row');
 
     for (let i = 0; i < (await shortcutRows.count()); i++) {
-      shortcutRows[i].focus();
+      shortcutRows.nth(i).focus();
       await page.keyboard.press('ArrowRight');
-      let activeElement = await page.evaluate(
+      let activeElementClass = await page.evaluate(
         () => document.activeElement?.getAttribute('class')
       );
-      expect(activeElement).toContain('jp-Shortcuts-ShortcutKeys');
+      expect(activeElementClass).toContain('jp-Shortcuts-ShortcutKeys');
     }
   });
 });
