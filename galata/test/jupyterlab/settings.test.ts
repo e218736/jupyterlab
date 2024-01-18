@@ -227,7 +227,7 @@ test('Check codemirror settings can all be set at the same time.', async ({
   }
 });
 test.describe('shorcuts list @A11y', () => {
-  test('Should focus shortcuts container using tab key', async ({ page }) => {
+  test.beforeEach(async ({ page }) => {
     await page.evaluate(async () => {
       await window.jupyterapp.commands.execute('settingeditor:open', {
         query: 'Keyboard Shortcuts'
@@ -236,7 +236,8 @@ test.describe('shorcuts list @A11y', () => {
     await expect(
       page.locator('.jp-Shortcuts-ShortcutListContainer')
     ).toHaveCount(1);
-
+  });
+  test('Should focus shortcuts container using tab key', async ({ page }) => {
     const shorcutList = page.locator('.jp-Shortcuts-ShortcutList');
     const shorcutListId = await shorcutList.getAttribute('id');
 
@@ -256,17 +257,6 @@ test.describe('shorcuts list @A11y', () => {
   test('Should focus shortcuts container row using tab key', async ({
     page
   }) => {
-    await page.evaluate(async () => {
-      await window.jupyterapp.commands.execute('settingeditor:open', {
-        query: 'Keyboard Shortcuts'
-      });
-    });
-    await expect(
-      page.locator('.jp-Shortcuts-ShortcutListContainer')
-    ).toHaveCount(1);
-
-    const shorcutRow = page.locator('.jp-Shortcuts-Row').first();
-
     // eslint-disable-next-line no-constant-condition
     while (true) {
       await page.keyboard.press('Tab');
@@ -278,6 +268,7 @@ test.describe('shorcuts list @A11y', () => {
       }
     }
 
+    const shorcutRow = page.locator('.jp-Shortcuts-Row').first();
     await expect(shorcutRow).toBeFocused();
   });
 });
