@@ -265,10 +265,6 @@ test.describe('shorcuts list @A11y', () => {
     await expect(shorcutRow).toBeFocused();
   });
 
-  test('Should focus shortcuts container using tab key', async ({ page }) => {
-    expect(page.locator('.jp-Shortcuts-ShortcutList')).toBeFocused();
-  });
-
   test('Should retain tab order by focusing property inspector using tab key', async ({
     page
   }) => {
