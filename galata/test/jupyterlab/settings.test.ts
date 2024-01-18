@@ -264,4 +264,47 @@ test.describe('shorcuts list @A11y', () => {
     const shorcutRow = page.locator('.jp-Shortcuts-Row').first();
     await expect(shorcutRow).toBeFocused();
   });
+
+  test('Should focus shortcuts container using tab key', async ({ page }) => {
+    expect(page.locator('.jp-Shortcuts-ShortcutList')).toBeFocused();
+  });
+
+  test('Should retain tab order by focusing property inspector using tab key', async ({
+    page
+  }) => {
+    const propertyInspector = page.getByTitle('Property Inspector');
+
+    // eslint-disable-next-line no-constant-condition
+    while (true) {
+      await page.keyboard.press('Tab');
+      let activeElementTitle = await page.evaluate(
+        () => document.activeElement?.getAttribute('title')
+      );
+      if (activeElementTitle === 'Property Inspector') {
+        break;
+      }
+    }
+
+    await expect(propertyInspector).toBeFocused();
+  });
+
+  test('Should retain tab order by focusing seach input using shift tab', async ({
+    page
+  }) => {
+    const searchInput = page.locator('.jp-InputGroup .jp-Shortcuts-Search');
+    const searchInputClass = await searchInput.getAttribute('class');
+
+    // eslint-disable-next-line no-constant-condition
+    while (true) {
+      await page.keyboard.press('Shift+Tab');
+      let activeElementClass = await page.evaluate(
+        () => document.activeElement?.getAttribute('class')
+      );
+      if (activeElementClass === searchInputClass) {
+        break;
+      }
+    }
+
+    await expect(searchInput).toBeFocused();
+  });
 });
