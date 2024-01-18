@@ -288,7 +288,6 @@ test.describe('shorcuts list @A11y', () => {
     page
   }) => {
     const searchInput = page.locator('.jp-InputGroup .jp-Shortcuts-Search');
-    const searchInputClass = await searchInput.getAttribute('class');
 
     // eslint-disable-next-line no-constant-condition
     while (true) {
@@ -296,7 +295,7 @@ test.describe('shorcuts list @A11y', () => {
       let activeElementClass = await page.evaluate(
         () => document.activeElement?.getAttribute('class')
       );
-      if (activeElementClass === searchInputClass) {
+      if (activeElementClass === '.jp-InputGroup .jp-Shortcuts-Search') {
         break;
       }
     }
