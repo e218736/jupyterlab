@@ -236,8 +236,7 @@ test.describe('shorcuts list @A11y', () => {
     await expect(
       page.locator('.jp-Shortcuts-ShortcutListContainer')
     ).toHaveCount(1);
-  });
-  test('Should focus shortcuts container using tab key', async ({ page }) => {
+
     const shorcutList = page.locator('.jp-Shortcuts-ShortcutList');
     const shorcutListId = await shorcutList.getAttribute('id');
 
@@ -251,22 +250,16 @@ test.describe('shorcuts list @A11y', () => {
         break;
       }
     }
+  });
+
+  test('Should focus shortcuts container using tab key', async ({ page }) => {
     expect(page.locator('.jp-Shortcuts-ShortcutList')).toBeFocused();
   });
 
-  test('Should focus shortcuts container row using tab key', async ({
+  test('Should focus shortcuts container first row using tab key', async ({
     page
   }) => {
-    // eslint-disable-next-line no-constant-condition
-    while (true) {
-      await page.keyboard.press('Tab');
-      let activeElementTitle = await page.evaluate(
-        () => document.activeElement?.getAttribute('title')
-      );
-      if (activeElementTitle === 'application:activate-next-tab') {
-        break;
-      }
-    }
+    await page.keyboard.press('Tab');
 
     const shorcutRow = page.locator('.jp-Shortcuts-Row').first();
     await expect(shorcutRow).toBeFocused();
