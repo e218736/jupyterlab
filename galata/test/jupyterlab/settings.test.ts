@@ -327,9 +327,9 @@ test.describe('shorcuts list @A11y', () => {
       await page.keyboard.press('ArrowDown');
 
       if (shortcutRows.nth(i) !== shortcutRows.last()) {
-        expect(shortcutRows.nth(i + 1)).toBeFocused();
+        await expect(shortcutRows.nth(i + 1)).toBeFocused();
       } else if (shortcutRows.nth(i) === shortcutRows.last()) {
-        expect(shortcutRows.first()).toBeFocused();
+        await expect(shortcutRows.first()).toBeFocused();
       }
     }
   });
@@ -344,9 +344,9 @@ test.describe('shorcuts list @A11y', () => {
       await page.keyboard.press('ArrowUp');
 
       if (shortcutRows.nth(i) !== shortcutRows.first()) {
-        expect(shortcutRows.nth(i - 1)).toBeFocused();
+        await expect(shortcutRows.nth(i - 1)).toBeFocused();
       } else if (shortcutRows.nth(i) === shortcutRows.first()) {
-        expect(shortcutRows.last()).toBeFocused();
+        await expect(shortcutRows.last()).toBeFocused();
       }
     }
   });
