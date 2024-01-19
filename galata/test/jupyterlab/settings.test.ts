@@ -322,7 +322,7 @@ test.describe('shorcuts list @A11y', () => {
 
     const shortcutRows = page.locator('.jp-Shortcuts-Row');
 
-    for (let i = 0; i < (await shortcutRows.count()); i++) {
+    for (let i = 0; i < (await shortcutRows.count()) - 1; i++) {
       await shortcutRows.nth(i).focus();
       await page.keyboard.press('ArrowDown');
 
@@ -339,7 +339,7 @@ test.describe('shorcuts list @A11y', () => {
 
     const shortcutRows = page.locator('.jp-Shortcuts-Row');
 
-    for (let i = 0; i < (await shortcutRows.count()); i++) {
+    for (let i = 0; i < (await shortcutRows.count()) - 1; i++) {
       await shortcutRows.nth(i).focus();
       await page.keyboard.press('ArrowUp');
 
@@ -348,6 +348,22 @@ test.describe('shorcuts list @A11y', () => {
       } else if (shortcutRows.nth(i) === shortcutRows.first()) {
         expect(shortcutRows.last()).toBeFocused();
       }
+    }
+  });
+
+  test('Should navigate to parent row from buttons using escape key', async ({
+    page
+  }) => {
+    const shortcutRows = page.locator('.jp-Shortcuts-Row');
+
+    for (let i = 0; i < (await shortcutRows.count()) - 1; i++) {
+      const shortcutListButton = shortcutRows.nth(i).locator('button').first();
+
+      await shortcutListButton.focus();
+
+      await page.keyboard.press('Escape');
+
+      expect(shortcutRows.nth(i)).toBeFocused();
     }
   });
 });
