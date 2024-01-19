@@ -317,4 +317,16 @@ test.describe('shorcuts list @A11y', () => {
       expect(activeElementClass).toContain('jp-Shortcuts-ShortcutKeys');
     }
   });
+  test('Should navigate rows using up/down arrow keys', async ({ page }) => {
+    await page.keyboard.press('Tab');
+
+    const shortcutRows = page.locator('.jp-Shortcuts-Row');
+
+    for (let i = 0; i < (await shortcutRows.count()); i++) {
+      await shortcutRows.nth(i).focus();
+      await page.keyboard.press('ArrowDown');
+
+      expect(shortcutRows.nth(i + 1)).toBeFocused();
+    }
+  });
 });
