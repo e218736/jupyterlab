@@ -317,7 +317,7 @@ test.describe('shorcuts list @A11y', () => {
       expect(activeElementClass).toContain('jp-Shortcuts-ShortcutKeys');
     }
   });
-  test('Should navigate rows using down arrow keys', async ({ page }) => {
+  test('Should navigate rows using down arrow key', async ({ page }) => {
     await page.keyboard.press('Tab');
 
     const shortcutRows = page.locator('.jp-Shortcuts-Row');
