@@ -325,6 +325,7 @@ test.describe('shorcuts list @A11y', () => {
     for (let i = 0; i < (await shortcutRows.count()); i++) {
       await shortcutRows.nth(i).focus();
       await page.keyboard.press('ArrowDown');
+      console.log(shortcutRows);
 
       expect(shortcutRows.nth(i + 1)).toBeFocused();
     }
