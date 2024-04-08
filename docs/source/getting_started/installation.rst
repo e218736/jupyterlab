@@ -6,7 +6,7 @@
 Installation
 ============
 
-JupyterLab can be installed using ``conda``, ``mamba``, ``pip``, ``pipenv`` or ``docker``.
+JupyterLab can be installed as a terminal-launched application accessible via a web browser (default), or as a desktop application which is running in its own window and can be opened by clicking on a desktop shortcut (`JupyterLab Desktop <https://github.com/jupyterlab/jupyterlab-desktop>`__). This page describes installation of the default (terminal-launched) JupyterLab application using ``conda``, ``mamba``, ``pip``, ``pipenv`` or ``docker`` and assumes basic knowledge of the terminal. For JupyterLab Desktop instructions see the `Installation section <https://github.com/jupyterlab/jupyterlab-desktop#installation>`__ in the JupyterLab Desktop repository.
 
 .. warning::
     New versions of JupyterLab may break backwards compatibility with extensions and other
@@ -106,14 +106,9 @@ The latest versions of the following browsers are currently known to work:
 -  Firefox
 -  Chrome
 -  Safari
+-  Edge
 
 Earlier browser versions may also work, but come with no guarantees.
-
-JupyterLab uses CSS Variables for styling, which is one reason for the
-minimum versions listed above.  IE 11+ or Edge 14 do not support
-CSS Variables, and are not directly supported at this time.
-A tool like `postcss <https://postcss.org/>`__ can be used to convert the CSS files in the
-``jupyterlab/build`` directory manually if desired.
 
 Installation problems
 ---------------------
